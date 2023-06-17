@@ -1,24 +1,23 @@
 <?php
 session_start();
-include('headergeb.php');
-$user = $_SESSION["user"];   
-?>
+$user = $_SESSION["user"];
+include('headerchat2.php');
 
-</form>				
-
-
-			
+if($user == "") {
+		echo "<script type='text/javascript'> document.location = 'login.php'; </script>";
+}
+    
+?>	
 </div>			
 <div class = "container">
-<h9>Mededelingen</h9>
-<br></div>
+<h9>Berichten</h9>
 <div class = "overlay">
 <div id="" style="overflow:scroll; height:800px;">
 <form method="POST" action="">
 	
 	
 <?php
-$sql = "SELECT * FROM `Berichten` ORDER BY `ID` DESC";
+$sql = "SELECT * FROM `Chat2` ORDER BY `ID` DESC";
 	$ret = $db->query($sql);	
 	$ond = array();
 	$send = array(); 	
@@ -85,11 +84,9 @@ if (isset($_POST["$rea"])) {
 	$_SESSION['onderwerp'] = $ond[$i];
 	$_SESSION['sender'] = $send[$i];
 	$_SESSION['bericht'] = $ber[$i];
-	echo "<script type='text/javascript'> document.location = 'Reageren.php'; </script>";
+	echo "<script type='text/javascript'> document.location = 'Reagerenchat2.php'; </script>";
 }
 }
-
-
 ?>
 
 </form>

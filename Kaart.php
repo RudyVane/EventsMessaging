@@ -1,49 +1,18 @@
 <?php
 session_start();
 $user = $_SESSION["user"];
-include('headerprive.php');
+include('headergeb.php');
 
 if($user == "") {
 		echo "<script type='text/javascript'> document.location = 'login.php'; </script>";
 }
     
-?>
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Kaart van Groningen</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.css" />
-    <style>
-        #map {
-            height: 400px;
-            width: 100%;
-        }
-    </style>
-</head>
-<body>
+?>	
 </div>			
 <div class = "container">
-<h9>Kaart van Groningen</h9>
+<h9>Kaart</h9>
 <div class = "overlay">
-    <div id="map"></div>
-
-    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
-    <script>
-        // Coördinaten van Groningen
-        var latitude = 53.219383;
-        var longitude = 6.566502;
-
-        // Kaart object aanmaken
-        var map = L.map('map').setView([latitude, longitude], 13);
-
-        // Kaarttegel toevoegen (bijv. OpenStreetMap)
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
-        }).addTo(map);
-
-        // Markering toevoegen op de locatie
-        L.marker([latitude, longitude]).addTo(map);
-    </script>
+<div id="" style="overflow:scroll; height:800px;">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d19102.46446581271!2d6.62342665!3d53.23921694999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1snl!2snl!4v1686997564420!5m2!1snl!2snl" width="900" height="450" style="border:0;position: absolute;left:10%" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 </body>
 </html>

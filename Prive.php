@@ -1,23 +1,24 @@
 <?php
 session_start();
-$user = $_SESSION["user"];
 include('headerprive.php');
+$user = $_SESSION["user"];   
+?>
 
-if($user == "") {
-		echo "<script type='text/javascript'> document.location = 'login.php'; </script>";
-}
-    
-?>	
+</form>				
+
+
+			
 </div>			
 <div class = "container">
 <h9>Berichten</h9>
+<br></div>
 <div class = "overlay">
-<div id="" style="overflow:scroll; height:800px;">
+<div id="scrollable-container" style="overflow: scroll; height: 800px;">
 <form method="POST" action="">
 	
 	
 <?php
-$sql = "SELECT * FROM `Prive` WHERE `Aan` = '$user' ORDER BY `ID` DESC";
+$sql = "SELECT * FROM `Prive` WHERE `Aan` = '$user' OR `Afzender`= '$user' ORDER BY `ID` DESC";
 	$ret = $db->query($sql);	
 	$send = array(); 	
 	$ids = array();
@@ -58,10 +59,12 @@ $sql = "SELECT * FROM `Prive` WHERE `Aan` = '$user' ORDER BY `ID` DESC";
   <div style = "text-align:center; line-height: 100%; border-top-left-radius: 25px; border-top-right-radius: 25px; background-color:Orange;">
   <p3>Van:<?php echo $send1 ?><br>
   <?php echo date('d-m-Y_H:i', $tijd["text"]) ?><br>
+  Onderwerp:<?php echo $onderwerp["text"] ?><br>
   </div>
   <textarea name="message"  style="height:100px; width: 100%; border:1px solid Orange; text-align:center; padding:10px; color:black; border-bottom-right-radius: 25px;border-bottom-left-radius: 25px; background: white;" readonly ><?php echo $bericht["text"] ?></textarea> 
-  <input type="submit" name="<?php echo "rea" . $tel ?>" style = "width:60%; left: 0%; border-radius: 25px;" value ="Reageren">
-  </div></div>
+  <div style = "text-align: center;margin-top: 5px;margin-bottom: 5px;">
+  <input type="submit" name="<?php echo "rea" . $tel ?>" value="Reageren" style="display: inline-block;">
+  </div></div></div>
   <br><br>
   <div>
   <?php 		

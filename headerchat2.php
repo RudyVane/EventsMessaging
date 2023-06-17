@@ -74,7 +74,6 @@ html, body {
 	font-size:4vw;
 	width:100%;
 }
-
 .container{
 	position: absolute;
 	top:5vw;
@@ -100,7 +99,7 @@ input[type=submit] {
   text-decoration: none;
   font-size: 1.25vw;
   cursor: pointer;
-  width: 15%;
+  width: 25%;
   
   display: block;
 	}
@@ -227,7 +226,7 @@ input[type=submit] {
   text-decoration: none;
   font-size: 4vw;
   cursor: pointer;
-  width: 100%;
+  width: 40%;
   height:12vw;
   padding: 1px 5px 1px 5px;
   display: inline;
@@ -300,11 +299,11 @@ if(isset($_POST['Home'])){
 }
 if(isset($_POST['Lezen'])){
 	$_SESSION['user'] = $user;
-	echo "<script type='text/javascript'> document.location = 'Prive.php'; </script>";
+	echo "<script type='text/javascript'> document.location = 'Chat2.php'; </script>";
 }
 if(isset($_POST['Zenden'])){
 	$_SESSION['user'] = $user;
-	echo "<script type='text/javascript'> document.location = 'Privezend.php'; </script>";
+	echo "<script type='text/javascript'> document.location = 'Chat2zend.php'; </script>";
 }
 ?>	
 

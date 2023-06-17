@@ -19,7 +19,9 @@ if($user == "") {
 <?php
 $sql = "SELECT * FROM `Kaartjes` ORDER BY `ID` DESC";
 	$ret = $db->query($sql);	
+	$ond = array();
 	$send = array(); 	
+	$gr1 = array();	
 	$ids = array();
 	$ber = array();
 	$response["tekst"] = array();
@@ -29,6 +31,8 @@ $sql = "SELECT * FROM `Kaartjes` ORDER BY `ID` DESC";
 	$bericht["text"] = array();
 	$message["text"] = array();
 	$tijd["text"] = array();
+	$groep["text"] = array();
+	$onderwerp["text"] = array();
 	$sender["text"] = array();
 	$new["text"] = array();
 	$teller["text"] = array();
@@ -38,7 +42,9 @@ $sql = "SELECT * FROM `Kaartjes` ORDER BY `ID` DESC";
         
         $message["text"] = $row["Bericht"];
 		$tijd["text"] = $row["Tijd"];
-		$sender["text"] = $row["Afzender"];			
+		$sender["text"] = $row["Afzender"];	
+		
+		$onderwerp["text"] = $row["Onderwerp"];			
 		$id["text"] = $row["ID"];
 		$num=$id["text"];
 				
@@ -49,6 +55,7 @@ $sql = "SELECT * FROM `Kaartjes` ORDER BY `ID` DESC";
         $bericht["text"] = str_replace("\\n","\n", $msgdecode); 
         array_push($ber,$bericht["text"]);
         array_push($send,$sender["text"]);
+		array_push($ond,$onderwerp["text"]);
 		$send1 = $sender["text"];
   
 	
@@ -58,10 +65,12 @@ $sql = "SELECT * FROM `Kaartjes` ORDER BY `ID` DESC";
   <div style = "text-align:center; line-height: 100%; border-top-left-radius: 25px; border-top-right-radius: 25px; background-color:Orange;">
   <p3>Van:<?php echo $send1 ?><br>
   <?php echo date('d-m-Y_H:i', $tijd["text"]) ?><br>
+  Onderwerp:<?php echo $onderwerp["text"] ?><br>
   </div>
   <textarea name="message"  style="height:100px; width: 100%; border:1px solid Orange; text-align:center; padding:10px; color:black; border-bottom-right-radius: 25px;border-bottom-left-radius: 25px; background: white;" readonly ><?php echo $bericht["text"] ?></textarea> 
-  <input type="submit" name="<?php echo "rea" . $tel ?>" style = "width:60%; left: 0%; border-radius: 25px;" value ="Reageren">
-  </div></div>
+  <div style = "text-align: center;margin-top: 5px;margin-bottom: 5px;">
+  <input type="submit" name="<?php echo "rea" . $tel ?>" value="Reageren" style="display: inline-block;">
+  </div></div></div>
   <br><br>
   <div>
   <?php 		
@@ -72,6 +81,7 @@ $sql = "SELECT * FROM `Kaartjes` ORDER BY `ID` DESC";
 for ($i=0; $i <= $tel; $i++){
 	$rea = "rea" . $i;
 if (isset($_POST["$rea"])) {
+	$_SESSION['onderwerp'] = $ond[$i];
 	$_SESSION['sender'] = $send[$i];
 	$_SESSION['bericht'] = $ber[$i];
 	echo "<script type='text/javascript'> document.location = 'Reagerenkaartjes.php'; </script>";

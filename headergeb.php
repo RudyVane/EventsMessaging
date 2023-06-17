@@ -19,7 +19,7 @@ if(!$db){
 date_default_timezone_set("Europe/Amsterdam");
 ?>
 <!DOCTYPE html>
-<html lang=”nl”>
+<html lang="nl">
 <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 <head>
 <link rel="apple-touch-icon" href="logo.png">
@@ -50,12 +50,24 @@ html, body {
     background: rgba(255,255,255,0.1);
     z-index: 10;
   }
+.hamburger {
+  display: none;
+  cursor: pointer;
+}
+
+.hamburger span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin-bottom: 5px;
+  background-color: #333;
+}
 .menu{
 	position: absolute;
 	top:12vw;
 	left: 1vw;
 	text-align:left;
-	line-height:0.15
+	line-height:0.15;
 	font-size:4vw;
 	width:100%;
 }
@@ -64,7 +76,7 @@ html, body {
 	top:5vw;
 	left: 40%;
 	text-align:left;
-	line-height:0.15
+	line-height:0.15;
 	font-size:4vw;
 	width:90%;
 }
@@ -119,14 +131,51 @@ textarea {
 	width:500px;
 }
 @media screen and (max-width: 600px) and (orientation: portrait){
-	
+.hamburger {
+    display: block;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 20;
+  }
+
+  .menu {
+    display: none;
+  }
+
+  .menu.show {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 20;
+  }
+
+  .menu.show ul {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  }
+
+  .menu.show ul li {
+    margin-bottom: 10px;
+  }	
 
 .overlay {
-    position: fixed;
-    width:50%;
+    position: absolute;
+    width:80%;
 	margin-right:5%;
     height: auto;
-    left: 20%;
+    left: 1%;
     top: 30vw;
     background: rgba(255,255,255,0.1);
     z-index: 10;
@@ -172,7 +221,7 @@ input[type=submit] {
   text-decoration: none;
   font-size: 4vw;
   cursor: pointer;
-  width: 40%;
+  width: 100%;
   height:12vw;
   padding: 1px 5px 1px 5px;
   display: inline;
@@ -182,7 +231,7 @@ input[type=submit] {
 	top:30vw;
 	left: 1vw;
 	text-align:left;
-	line-height:0.15
+	line-height:0.15;
 	font-size:4vw;
 	width:100%;
 }
@@ -190,9 +239,9 @@ input[type=submit] {
 .container{
 	position: absolute;
 	top:25vw;
-	left: 50%;
+	left: 10%;
 	text-align:left;
-	line-height:0.15
+	line-height:0.15;
 	font-size:4vw;
 	width:90%;
 }
@@ -201,15 +250,19 @@ textarea {
 }	
 }
 </style> 
-
-</head>
-<body>
-
 <script>
 if ( window.history.replaceState ) {
     window.history.replaceState( null, null, window.location.href );
 }
 </script>
+</head>
+<body>
+<div class="hamburger">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+
 
 <div style="position: absolute;top:1vw;left: 1vw; ">	
 <img src="logo.png" ><p>
@@ -219,18 +272,40 @@ echo "Ingelogd als: ";
 echo $user;
 ?>
 </p></div>
-<div class = "menu">
-<br>
 <form action = "" method ="POST">
-		<input type="submit" name="Algemeen" value="Berichten organisatie" /><br>
-		<input type="submit" name="Programma" value="Programma" /><br>
-		<input type="submit" name="Kaart" value="Kaart omgeving" /><br>
-		<input type="submit" name="Chat1" value="Chat programma" /><br>
-		<input type="submit" name="Chat2" value="Chat eten" /><br>
-		<input type="submit" name="Kaartjes" value="Kaartjes gevraagd/aangeboden" /><br>
-		<input type="submit" name="Chat3" value="Privé berichten" /><br>
-		
+<div class="menu">
+  <ul>
+    <li>
+      <input type="submit" name="Algemeen" value="Berichten organisatie" /><br>
+    </li>
+    <li>
+      <input type="submit" name="Programma" value="Programma" /><br>
+    </li>
+    <li>
+      <input type="submit" name="Kaart" value="Kaart omgeving" /><br>
+    </li>
+    <li>
+      <input type="submit" name="Chat1" value="Chat programma" /><br>
+    </li>
+    <li>
+      <input type="submit" name="Chat2" value="Chat eten" /><br>
+    </li>
+    <li>
+      <input type="submit" name="Kaartjes" value="Kaartjes gevraagd/aangeboden" /><br>
+    </li>
+    <li>
+      <input type="submit" name="Chat3" value="Privé berichten" /><br>
+    </li>
+  </ul>
+</div>		
 </form><p>
+<script>
+const hamburger = document.querySelector('.hamburger');
+  const menu = document.querySelector('.menu');
+  hamburger.addEventListener("click", () => {
+    menu.classList.toggle('show');
+  });
+</script>
 <?php
 if(isset($_POST['Algemeen'])){
 	$_SESSION['user'] = $user;

@@ -60,8 +60,9 @@ $sql = "SELECT * FROM `Chat1` ORDER BY `ID` DESC";
   <?php echo date('d-m-Y_H:i', $tijd["text"]) ?><br>
   </div>
   <textarea name="message"  style="height:100px; width: 100%; border:1px solid Orange; text-align:center; padding:10px; color:black; border-bottom-right-radius: 25px;border-bottom-left-radius: 25px; background: white;" readonly ><?php echo $bericht["text"] ?></textarea> 
-  <input type="submit" name="<?php echo "rea" . $tel ?>" style = "width:60%; left: 0%; border-radius: 25px;" value ="Reageren">
-  </div></div>
+  <div style = "text-align: center;margin-top: 5px;margin-bottom: 5px;">
+  <input type="submit" name="<?php echo "rea" . $tel ?>" value="Reageren" style="display: inline-block;">
+  </div></div></div>
   <br><br>
   <div>
   <?php 		

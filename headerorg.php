@@ -51,15 +51,27 @@ html, body {
     background: rgba(255,255,255,0.1);
     z-index: 10;
   }
+.hamburger {
+  display: none;
+  cursor: pointer;
+}
+
+.hamburger span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin-bottom: 5px;
+  background-color: #333;
+}
 .menu{
 	position: absolute;
 	top:12vw;
 	left: 1vw;
 	text-align:left;
-	line-height:0.15
+	line-height:0.15;
 	font-size:4vw;
 	width:100%;
-}
+}}
 .container{
 	position: absolute;
 	top:5vw;
@@ -122,12 +134,51 @@ textarea {
 @media screen and (max-width: 600px) and (orientation: portrait){
 	
 
+.hamburger {
+    display: block;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 20;
+  }
+
+  .menu {
+    display: none;
+  }
+
+  .menu.show {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 20;
+  }
+
+  .menu.show ul {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  }
+
+  .menu.show ul li {
+    margin-bottom: 10px;
+  }	
+
 .overlay {
-    position: fixed;
-    width:50%;
+    position: absolute;
+    width:80%;
 	margin-right:5%;
     height: auto;
-    left: 20%;
+    left: 1%;
     top: 30vw;
     background: rgba(255,255,255,0.1);
     z-index: 10;
@@ -191,9 +242,9 @@ input[type=submit] {
 .container{
 	position: absolute;
 	top:25vw;
-	left: 50%;
+	left: 10%;
 	text-align:left;
-	line-height:0.15
+	line-height:0.15;
 	font-size:4vw;
 	width:90%;
 }
@@ -205,7 +256,11 @@ textarea {
 
 </head>
 <body>
-
+<div class="hamburger">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
 <script>
 if ( window.history.replaceState ) {
     window.history.replaceState( null, null, window.location.href );
@@ -230,6 +285,13 @@ echo $user;
 		<input type="submit" name="Chat3" value="Privé berichten" /><br>
 		
 </form><p>
+<script>
+const hamburger = document.querySelector('.hamburger');
+  const menu = document.querySelector('.menu');
+  hamburger.addEventListener("click", () => {
+    menu.classList.toggle('show');
+  });
+</script>
 <?php
 if(isset($_POST['Algemeen'])){
 	$_SESSION['user'] = $user;

@@ -1,5 +1,5 @@
 <?php
-include('headerkaartjes.php');
+include('headerchat2.php');
 		
 ?>
 </div></div>
@@ -35,7 +35,7 @@ $t = time();
 
 $msgcode = base64_encode($msg);
 $sql2 =<<<EOF
-	   INSERT INTO Kaartjes (`Afzender`, `Onderwerp`, `Bericht`,`Tijd`) 
+	   INSERT INTO Chat2 (`Afzender`, `Onderwerp`, `Bericht`,`Tijd`) 
 	   VALUES ('$user','$ond', '$msgcode','$t');
 	   
 EOF;
@@ -44,7 +44,7 @@ EOF;
       echo $db->lastErrorMsg();
    }
    
-   echo "<script type='text/javascript'> document.location = 'Kaartjes.php'; </script>";
+   echo "<script type='text/javascript'> document.location = 'Chat2.php'; </script>";
    
 }
 	?>
